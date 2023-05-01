@@ -1,0 +1,30 @@
+{
+  "name": "project-icqq-re",
+  "version": "1.0.0",
+  "description": "A Bot For QQ-Group.",
+  "main": "./core/dist/launch.js",
+  "scripts": {
+    "test": "tsc -b && npm start",
+    "start": "node ./core/dist/launch.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "//"
+  },
+  "keywords": [
+    "qqBot",
+    "icqq"
+  ],
+  "author": "Kamenomi",
+  "license": "MPL-2.0",
+  "dependencies": {
+    "canvas": "^2.11.2",
+    "icqq": "^0.3.1",
+    "pngjs": "^7.0.0"
+  },
+  "devDependencies": {
+    "@mapbox/node-pre-gyp": "^1.0.10",
+    "@types/node": "^18.16.2",
+    "@types/pngjs": "^6.0.1"
+  }
+}
