@@ -1,0 +1,64 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * Simple System Infomation (我说的)
+ */
+const node_os_1 = __importDefault(require("node:os"));
+var isExistTimer = false;
+var momentIdleTime = 0, momentTotalTime = 0;
+function queryTimer() {
+    let lastTime = { IDLE: 0, TOTAL: 0 };
+    setInterval(() => {
+        function queryCPU() {
+            var totalTime = 0, idleTime = 0;
+            const cpus = node_os_1.default.cpus();
+            for (let cpu in cpus) {
+                let times = cpus[cpu].times;
+                idleTime += times.idle;
+                totalTime = totalTime + times.user + times.sys + times.nice + times.irq + times.idle;
+            }
+            ;
+            return { IDLE: idleTime, TOTAL: totalTime };
+        }
+        ;
+        const currentTimes = queryCPU();
+        momentIdleTime = currentTimes.IDLE - lastTime.IDLE;
+        momentTotalTime = currentTimes.TOTAL - lastTime.TOTAL;
+        lastTime = currentTimes;
+        console.log(1 - momentIdleTime / momentTotalTime);
+    }, 1000);
+}
+;
+class CSystemInfo {
+    OS_PLATFORM = `${node_os_1.default.version()} ${node_os_1.default.machine()}`;
+    OS_BASIC_CPU = node_os_1.default.cpus()[0].model; // 除了服务器，谁家多个cpu?
+    OS_BASIC_TOTAL_MEM = node_os_1.default.totalmem();
+    get OS_DETAIL_CPU() {
+        return {
+            name: this.OS_BASIC_CPU,
+            usage: Number((1 - (momentIdleTime / momentTotalTime)).toFixed(4))
+        };
+    }
+    ;
+    get OS_DETAIL_MEM() {
+        return {
+            free: node_os_1.default.freemem(),
+            usage: node_os_1.default.totalmem() - node_os_1.default.freemem(),
+            total: node_os_1.default.totalmem(),
+            percent: Number((1 - node_os_1.default.freemem() / node_os_1.default.totalmem()).toFixed(4))
+        };
+    }
+    ;
+    constructor() {
+        if (!isExistTimer) {
+            queryTimer();
+            isExistTimer = true;
+        }
+        ;
+    }
+    ;
+}
+;

@@ -10,7 +10,7 @@ setInterval(() => {
 
   latestDate = (new Date).getDate();
   callbackSet.forEach(func => func.call(func));
-}, 30 * 60 * 60 * 1000); // 30min
+}, 1000 * 60 * 30); // 30min
 
 export default function addFunction(func: Function) {
   func.call(func);

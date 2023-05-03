@@ -41,7 +41,7 @@ export default class CLogger {
     });
 
     const preTime = new Date().toISOString();
-    const rawLog = `${preTime} - %c${level.padEnd(5)}%c  ${logString}`;
+    const rawLog = `${preTime} - %c${level.padEnd(5).toUpperCase()}%c  ${logString}`;
 
     enum EColorLevel {
       info = 'white',

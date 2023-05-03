@@ -23,9 +23,9 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const canvas_1 = require("canvas");
 const icqq_1 = require("icqq");
 const globalInit = __importStar(require("../globalInit"));
+const system_1 = require("./system");
 const console = globalInit.globalProj.logger;
 const qqClient = globalInit.qqClient;
 const globalProj = globalInit.globalProj;
@@ -44,14 +44,9 @@ qqClient.on('message.group.normal', groupMsgEvent => {
         if (command != val.command && command != val.alias)
             return;
         if (val.label == 'color_pic') {
-            let canvas = new canvas_1.Canvas(1920, 1080, 'image');
-            let context = canvas.getContext('2d');
-            context.fillStyle = `rgb(${(Math.random() * 255).toFixed(0)}, ${(Math.random() * 255).toFixed(0)}, ${(Math.random() * 255).toFixed(0)})`;
-            context.fillRect(0, 0, canvas.width, canvas.height);
-            context.save();
             groupMsgEvent.reply([
-                '1080P 超纯色图! 一个字，超级色! ',
-                icqq_1.segment.image(canvas.toBuffer('image/png'))
+                '1092px * 1080px',
+                icqq_1.segment.image((0, system_1.getColorBackground)())
             ]);
         }
         ;

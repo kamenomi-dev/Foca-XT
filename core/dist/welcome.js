@@ -8,12 +8,20 @@
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 function welcome() {
-    console.log("  ______                     _   \n" +
-        "  |  ___|                   | |  \n" +
-        "  | |_ ___   ___ __ _  __  _| |_ \n" +
-        "  |  _/ _ \\ / __/ _` | \\ \\/ | __|\n" +
-        "  | || (_) | (_| (_| |  >  <| |_ \n" +
-        "  \\_| \\___/ \\___\\__,_| /_/\\_\\\\__|\n");
+    console.log(`
+  ░░░░░░░  ░░░░░░   ░░░░░░  ░░░░░      ░░   ░░ ░░░░░░░░ 
+  ▒▒      ▒▒    ▒▒ ▒▒      ▒▒   ▒▒      ▒▒ ▒▒     ▒▒    
+  ▒▒▒▒▒   ▒▒    ▒▒ ▒▒      ▒▒▒▒▒▒▒       ▒▒▒      ▒▒    
+  ▓▓      ▓▓    ▓▓ ▓▓      ▓▓   ▓▓      ▓▓ ▓▓     ▓▓    
+  ██       ██████   ██████ ██   ██     ██   ██    ██    
+
+  Author: Kamenomi (Kamenomi@tuta.io)
+  Project: ${process.env.npm_package_name}
+  Version: ${process.env.npm_package_version}
+  License: Mozilla Public License - 2.0
+
+   <-><<->><-><<->><-><<->><-><<->><-><<->><-><<->><->
+  `);
 }
 exports.default = welcome;
 ;

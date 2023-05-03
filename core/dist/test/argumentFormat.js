@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 function parseArgumentFormat(text) {
     const arr = text.match(/%[a-zA-Z]/);
     var result = text;
-    arr?.forEach((val, idx) => {
+    arr?.forEach((val) => {
         const pos = result.indexOf(val);
         if (result[pos - 1] == '\\')
             return;

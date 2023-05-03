@@ -10,7 +10,7 @@ setInterval(() => {
         return;
     latestDate = (new Date).getDate();
     callbackSet.forEach(func => func.call(func));
-}, 30 * 60 * 60 * 1000); // 30min
+}, 1000 * 60 * 30); // 30min
 function addFunction(func) {
     func.call(func);
     return callbackSet.add(func).size - 1;

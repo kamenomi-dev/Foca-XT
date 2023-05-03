@@ -12,16 +12,22 @@ Object.defineProperty(exports, "globalProj", { enumerable: true, get: function (
 Object.defineProperty(exports, "qqClient", { enumerable: true, get: function () { return login_1.qqClient; } });
 const console = login_1.globalProj.logger;
 const botConfig = login_1.globalProj.botConfig;
-login_1.qqClient.on('system.online', () => {
+login_1.qqClient.once('system.online', () => {
     console.info('GlobalInit: Initing and setting something. ');
     if (botConfig.nickname != undefined) {
         let lastNickname = login_1.qqClient.nickname;
-        login_1.qqClient.setNickname(botConfig.nickname).then(val => {
-            if (val)
-                console.info(`GlobalInit: Success set bot\'s nickname! ${lastNickname} -√> ${botConfig.nickname}`);
-            else
-                console.error(`GlobalInit: Fail set bot\'s nickname! ${lastNickname} -×> ${botConfig.nickname}`);
-        });
+        if (botConfig.nickname == lastNickname) {
+            console.info(`GlobalInit: Same bot\'s nickname! ${lastNickname} <=> ${botConfig.nickname}`);
+        }
+        else {
+            login_1.qqClient.setNickname(botConfig.nickname).then(val => {
+                if (val)
+                    console.info(`GlobalInit: Success set bot\'s nickname! ${lastNickname} -√> ${botConfig.nickname}`);
+                else
+                    console.error(`GlobalInit: Fail set bot\'s nickname! ${lastNickname} -×> ${botConfig.nickname}`);
+            });
+        }
+        ;
     }
     ;
     function clockGroupNameRule() {

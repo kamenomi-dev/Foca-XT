@@ -20,11 +20,13 @@
   "dependencies": {
     "canvas": "^2.11.2",
     "icqq": "^0.3.1",
-    "pngjs": "^7.0.0"
+    "pngjs": "^7.0.0",
+    "ultimate-text-to-image": "^1.0.1"
   },
   "devDependencies": {
     "@mapbox/node-pre-gyp": "^1.0.10",
     "@types/node": "^18.16.2",
+    "@types/os-utils": "^0.0.1",
     "@types/pngjs": "^6.0.1"
   }
 }

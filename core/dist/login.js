@@ -42,7 +42,7 @@ process.on('uncaughtException', (error, origin) => {
     globalProj.logger.fatal(`Default: ${origin}`);
     process.exit(1);
 }).on('unhandledRejection', reason => {
-    globalProj.logger.fatal(`Project: Catch promise-reject: \n${reason}`);
+    globalProj.logger.fatal(`Project: Catch promise-reject: ${reason}`);
     process.exit(1);
 });
 qqClient.on('system.login.slider', slider => {
@@ -106,8 +106,9 @@ qqClient.on('system.online', () => {
 }).on('system.offline', reason => {
     globalProj.logger.warn(`Login: bot offline! reason: ${reason.message}`);
 });
+// qqClient.on('message.private.self', msgRet => {
+//   globalProj.logger.info(msgRet)
+// });
 qqClient.login(globalProj.botConfig.bot_qid, globalProj.botConfig.password);
 require("./globalInit");
-Object.assign(process.env, {
-    globalClient: qqClient
-});
+global.globalClient = qqClient;

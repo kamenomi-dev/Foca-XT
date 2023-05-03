@@ -36,8 +36,10 @@ function reload() {
 ;
 reload();
 require("./login");
-Object.assign(process.env, {
-    globalConfig: botConfig,
-    globalLogger: logger,
-    globalReload: reload.bind(reload)
-});
+require("./util/clock");
+require("./util/textTable");
+require("./util/systemInfo");
+require("./util/byteUnitConverter");
+global.globalConfig = botConfig,
+    global.globalLogger = logger,
+    global.globalReload = reload.bind(reload);

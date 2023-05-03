@@ -31,8 +31,12 @@ function reload() { // Todo: Support reload.
 
 export { logger, botConfig };
 import './login';
+import './util/clock';
+import './util/textTable';
+import './util/systemInfo';
+import './util/byteUnitConverter';
 
-type TBotConfig = {
+export type TBotConfig = {
   nickname?: string,
   admin: number[],
   bot_qid: number,
@@ -45,9 +49,6 @@ type TBotConfig = {
   }[]
 };
 
-Object.assign(process.env, {
-  globalConfig: botConfig,
-  globalLogger: logger,
-
-  globalReload: reload.bind(reload)
-});
+global.globalConfig = botConfig,
+global.globalLogger = logger,
+global.globalReload = reload.bind(reload)

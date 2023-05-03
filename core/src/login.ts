@@ -18,7 +18,7 @@ process.on('uncaughtException', (error, origin) => {
 
   process.exit(1);
 }).on('unhandledRejection', reason => {
-  globalProj.logger.fatal(`Project: Catch promise-reject: \n${reason}`);
+  globalProj.logger.fatal(`Project: Catch promise-reject: ${reason}`);
 
   process.exit(1);
 });
@@ -90,6 +90,10 @@ qqClient.on('system.online', () => {
   globalProj.logger.warn(`Login: bot offline! reason: ${reason.message}`);
 });
 
+// qqClient.on('message.private.self', msgRet => {
+//   globalProj.logger.info(msgRet)
+// });
+
 qqClient.login(
   globalProj.botConfig.bot_qid,
   globalProj.botConfig.password
@@ -98,6 +102,4 @@ qqClient.login(
 export { globalProj, qqClient };
 import './globalInit';
 
-Object.assign(process.env, {
-  globalClient: qqClient
-});
+global.globalClient = qqClient;

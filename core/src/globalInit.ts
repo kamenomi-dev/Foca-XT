@@ -6,16 +6,20 @@ import { globalProj, qqClient } from "./login";
 const console = globalProj.logger;
 const botConfig = globalProj.botConfig;
 
-qqClient.on('system.online', () => {
+qqClient.once('system.online', () => {
   console.info('GlobalInit: Initing and setting something. ');
   if (botConfig.nickname != undefined) {
     let lastNickname = qqClient.nickname;
-    qqClient.setNickname(botConfig.nickname).then(val => {
-      if (val)
-        console.info(`GlobalInit: Success set bot\'s nickname! ${lastNickname} -√> ${botConfig.nickname}`);
-      else
-        console.error(`GlobalInit: Fail set bot\'s nickname! ${lastNickname} -×> ${botConfig.nickname}`);
-    });
+    if (botConfig.nickname == lastNickname) {
+      console.info(`GlobalInit: Same bot\'s nickname! ${lastNickname} <=> ${botConfig.nickname}`);
+    } else {
+      qqClient.setNickname(botConfig.nickname).then(val => {
+        if (val)
+          console.info(`GlobalInit: Success set bot\'s nickname! ${lastNickname} -√> ${botConfig.nickname}`);
+        else
+          console.error(`GlobalInit: Fail set bot\'s nickname! ${lastNickname} -×> ${botConfig.nickname}`);
+      });
+    };
   };
 
   function clockGroupNameRule() {
@@ -49,7 +53,7 @@ qqClient.on('system.online', () => {
 
       resultArray.forEach(dir => {
         if (dir.isFile() && dir.name.slice(-3) == '.ts') {
-          import (`./plugin/${dir.name.slice(0, -3)}.js`).then(() => {
+          import(`./plugin/${dir.name.slice(0, -3)}.js`).then(() => {
             globalProj.logger.info(`GlobalInit: Success load plugin ${dir.name} ! `);
           }).catch(err => {
             globalProj.logger.error(`GlobalInit: Fail load plugin ${dir.name} ! `);
